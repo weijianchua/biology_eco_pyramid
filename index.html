@@ -11,14 +11,15 @@
 </head>
 
 <body>
-    <div class="content_container" style="text-align:center">
+    <div class="content_container" style="text-align:center; padding: 20px">
         <h1 class="content_title">Ecological Pyramids</h1>
         <p class="content_text">This is a simulation to help you better understand ecological pyramids. 
-        </br> </br> Using this simulation, you can generate the <b>pyramid of biomass</b> and <b>pyramid of abundance</b> based on an ecosystem composition of your choice.</p>
+        </br> </br> Using this simulation, you can generate the <b>pyramid of biomass</b> and <b>pyramid of abundance</b> </br>based on an ecosystem composition of your choice.</p>
     </div>
 
-    <div class="body_container" style="text-align:center; margin-top: 15px;">
+    <div class="body_container" style="text-align:center; margin-top: 15px; padding: 20px">
         <div>
+            <p>Using the field below, indicate the number of species present in this ecosystem. Then, add in the </br>abundance (no. of individuals) and biomass (mass of each individual in kilograms) for each species.</p>
             <label for="speciesCount">Number of Species:</label>
             <input type="number" id="speciesCount" value="0" min="1" max="5" oninput="validateSpeciesCount()">
             <div id="speciesCountMessage" style="color: red;"></div> 
@@ -29,18 +30,18 @@
     <div id="speciesDetailsContainer"></div>
 
             <div style= "margin-top: 15px;">
+                <p>After selecting the number of species, followed by the abundance and biomass of the species, </br>click 'Generate Ecosystem' to obtain the plots.</p>
                 <button class="button button1" onclick="generateEcosystem()">Generate Ecosystem</button>
-                <p>After selecting the number of species, followed by the abundance and biomass of the species, click 'Generate Ecosystem' to obtain the plots.</p>
             </div>
 
             <div class="pyramid_output" style="margin-top: 15px;">           
-                <canvas id="pyramidOfBiomass" height="175%"></canvas>
-                <canvas id="pyramidOfAbundance" height="175%"></canvas>
+                <canvas id="pyramidOfBiomass" height="140%"></canvas>
+                <canvas id="pyramidOfAbundance" height="140%"></canvas>
             </div>
         </div>    
 
     <!-- Container for Footnotes -->
-    <div class="content_container" style="text-align:center; margin-top: 15px">
+    <div class="content_container" style="text-align:center; margin-top: 15px; padding: 20px">
         <div class="content_container" style="text-align:center">
         <p class="content_text">This is simulation was made by Chua Wei Jian.</p>
         </div>

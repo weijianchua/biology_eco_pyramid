@@ -14,12 +14,16 @@ function generateEcosystem() {
         const abundance = abundanceInput ? parseInt(abundanceInput.value, 10) || 0 : 0;
         const biomass = biomassInput ? (parseInt(biomassInput.value, 10) || 0) * abundanceInput.value : 0;
 
-        biomassData.push({value: biomass, species: `Species ${i}`});
-        abundanceData.push({value: abundance, species: `Species ${i}`});
+        const speciesNameInput = document.getElementById(`speciesName${i}`);
+        const speciesName = speciesNameInput ? speciesNameInput.value.trim() || `Species ${i}` : `Species ${i}`;
+
+        biomassData.push({value: biomass, species: speciesName});
+        abundanceData.push({value: abundance, species: speciesName});
+
     }
 
     // Update charts
-    updateChart('pyramidOfBiomass', biomassData, 'Plot of Biomass',' Plot of Abundance','greenToRed');
+    updateChart('pyramidOfBiomass', biomassData, 'Plot of Biomass',' Plot of Biomass (kg)','greenToRed');
     updateChart('pyramidOfAbundance', abundanceData, 'Plot of Abundance',' Plot of Abundance','redToGreen');
 }
 
@@ -92,11 +96,26 @@ function updateChart(canvasId, data, label, chartTitle, colorRange) {
     }
 }
 
+// Function to move species up
+function moveSpecies(i, direction, speciesCount) {
+    // i is the current index, direction is -1 for up, 1 for down
+    if ((direction === -1 && i > 1) || (direction === 1 && i < speciesCount)) {
+        // Swap the species order
+        [document.getElementById(`speciesName${i}`).value, document.getElementById(`speciesName${i + direction}`).value] =
+        [document.getElementById(`speciesName${i + direction}`).value, document.getElementById(`speciesName${i}`).value];
+        [document.getElementById(`abundanceSpecies${i}`).value, document.getElementById(`abundanceSpecies${i + direction}`).value] =
+        [document.getElementById(`abundanceSpecies${i + direction}`).value, document.getElementById(`abundanceSpecies${i}`).value];
+        [document.getElementById(`biomassSpecies${i}`).value, document.getElementById(`biomassSpecies${i + direction}`).value] =
+        [document.getElementById(`biomassSpecies${i + direction}`).value, document.getElementById(`biomassSpecies${i}`).value];
+
+        generateEcosystem(); // Update the ecosystem
+    }
+}
 
 function validateSpeciesCount() {
     const speciesCountInput = document.getElementById('speciesCount');
     const container = document.getElementById('speciesDetailsContainer');
-    const messageDiv = document.getElementById('speciesCountMessage'); // Ensure this div exists in your HTML
+    const messageDiv = document.getElementById('speciesCountMessage');
     const speciesCount = parseInt(speciesCountInput.value, 10);
 
     // Validate species count and display messages
@@ -129,11 +148,35 @@ function validateSpeciesCount() {
         biomassInput.placeholder = `Biomass for S${i} (kg)`;
         biomassInput.className = 'input-small';
 
-        // Append inputs to the container
+        // Create and append species name input
+        const speciesNameInput = document.createElement('input');
+        speciesNameInput.type = 'text';
+        speciesNameInput.id = `speciesName${i}`;
+        speciesNameInput.placeholder = `Name of S${i}`;
+        speciesNameInput.className = 'input-small';
         container.appendChild(document.createTextNode(`Species ${i}: `));
+        container.appendChild(speciesNameInput);
+
+        // Append inputs to the container
+        container.appendChild(speciesNameInput);
         container.appendChild(abundanceInput);
         container.appendChild(biomassInput);
+
+        // Move Up button
+        const moveUpButton = document.createElement('button');
+        moveUpButton.innerText = '↑';
+        moveUpButton.onclick = function() { moveSpecies(i, -1, speciesCount); };
+        container.appendChild(moveUpButton);
+
+        // Move Down button
+        const moveDownButton = document.createElement('button');
+        moveDownButton.innerText = '↓';
+        moveDownButton.onclick = function() { moveSpecies(i, 1, speciesCount); };
+        container.appendChild(moveDownButton);
+
         container.appendChild(document.createElement('br')); // Line break for layout
+
+
     }
 }
 
