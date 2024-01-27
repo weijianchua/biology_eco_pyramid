@@ -6,12 +6,26 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#title {
-    font-size: 24px;
-    color: black;
-    text-align: center;
-    margin: 20px 0;
+.content_container {
+    width: 80%; /* Adjust the width as needed */
+    margin: auto; /* Center align the container */
+    padding: 20px; /* Add some padding around the content */
+    background-color: #EADDCA;
+    border-radius: 8px; /* Optional: adds rounded corners to the container */
 }
+
+.content_title {
+    margin-bottom: 20px; /* Space between the title and text */
+    color: darkgreen;
+    font-family: Arial, sans-serif; /* Font family, change as needed */
+}
+
+.content_text {
+    color: black;
+    font-family: Arial, sans-serif; /* Font family, change as needed */
+    line-height: 1.6; /* Adjust line spacing for better readability */
+}
+
 
 .canvas-container {
     display: flex;
@@ -19,6 +33,24 @@ body {
     width: 100%;
 }
 
-canvas {
-    margin: 0 10px;
+.pyramid_output {
+    display: flex; /* Use Flexbox */
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically, if needed */
+    gap: 20px; /* Add some space between the two canvases */
 }
+
+.pyramid_output canvas {
+    max-width: 45%; /* Control the maximum width of each canvas */
+    height: auto; /* Maintain the aspect ratio */
+}
+
+#speciesDetailsContainer {
+    margin-top: 15px;
+}
+
+#speciesDetailsContainer input {
+    margin: 5px;
+    padding: 5px;
+}
+

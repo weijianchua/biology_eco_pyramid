@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ecosystem Simulation</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-</head>
-<body>
-<div>
-    <label for="speciesCount">Number of Species:</label>
-    <input type="number" id="speciesCount" value="3" min="1" max="10">
-</div>
-<div>
-    <button onclick="generateEcosystem()">Generate Ecosystem</button>
-</div>
-<canvas id="pyramidOfBiomass" width="400" height="400"></canvas>
-<canvas id="pyramidOfAbundance" width="400" height="400"></canvas>
 
-<script src="ecosystemSimulation.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ecological Pyramids</title>
+    <link rel="icon" type="image/x-icon" href="ecopyramids.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+
+<body>
+    <div class="content_container" style="text-align:center">
+        <h1 class="content_title">Ecological Pyramids</h1>
+        <p class="content_text">This is a simulation to help you better understand ecological inputs. 
+        </br> </br> Using this simulation, you can generate the <b>pyramid of biomass</b> and <b>pyramid of abundance</b> based on an ecosystem composition of your choice.</p>
+    </div>
+
+    <div class="body_container" style="text-align:center; margin-top: 80px;">
+        <div>
+            <label for="speciesCount">Number of Species:</label>
+            <input type="number" id="speciesCount" value="0" min="1" max="5" oninput="validateSpeciesCount()">
+            <div id="speciesCountMessage" style="color: red;"></div> <!-- Message will be displayed here -->
+        </div>
+
+<!-- Container for dynamically added abundance and biomass inputs -->
+<div id="speciesDetailsContainer"></div>
+
+        <div>
+            <button onclick="generateEcosystem()">Generate Ecosystem</button>
+        </div>
+
+        <div class="pyramid_output">
+            <canvas id="pyramidOfBiomass" ></canvas>
+            <canvas id="pyramidOfAbundance"></canvas>
+        </div>
+    </div>    
+
+
+    <script src="ecosystemSimulation.js"></script>
 </body>
 </html>
