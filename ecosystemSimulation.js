@@ -19,12 +19,12 @@ function generateEcosystem() {
     }
 
     // Update charts
-    updateChart('pyramidOfBiomass', biomassData, 'Pyramid of Biomass', 'greenToRed');
-    updateChart('pyramidOfAbundance', abundanceData, 'Pyramid of Abundance', 'redToGreen');
+    updateChart('pyramidOfBiomass', biomassData, 'Pyramid of Biomass',' Pyramid of Abundance','greenToRed');
+    updateChart('pyramidOfAbundance', abundanceData, 'Pyramid of Abundance',' Pyramid of Abundance','redToGreen');
 }
 
 
-function updateChart(canvasId, data, label, colorRange) {
+function updateChart(canvasId, data, label, chartTitle, colorRange) {
     const ctx = document.getElementById(canvasId).getContext('2d');
     const totalSpecies = data.length; // Total number of species
 
@@ -56,14 +56,32 @@ function updateChart(canvasId, data, label, colorRange) {
                 borderWidth: 1
             }]
         },
-        options: {
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    beginAtZero: true
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: chartTitle,
+                        color: 'black',
+                        padding: {
+                            top: 10,
+                            bottom: 10
+                        },
+                        font: {
+                            size: 16,
+                            style: 'underline'
+                        },
+                    }
                 }
             }
-        }
     });
 
     // Update the global reference to the new chart instance
