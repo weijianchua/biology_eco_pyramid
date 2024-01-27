@@ -19,8 +19,8 @@ function generateEcosystem() {
     }
 
     // Update charts
-    updateChart('pyramidOfBiomass', biomassData, 'Pyramid of Biomass',' Pyramid of Abundance','greenToRed');
-    updateChart('pyramidOfAbundance', abundanceData, 'Pyramid of Abundance',' Pyramid of Abundance','redToGreen');
+    updateChart('pyramidOfBiomass', biomassData, 'Plot of Biomass',' Plot of Abundance','greenToRed');
+    updateChart('pyramidOfAbundance', abundanceData, 'Plot of Abundance',' Plot of Abundance','redToGreen');
 }
 
 
@@ -39,8 +39,8 @@ function updateChart(canvasId, data, label, chartTitle, colorRange) {
     // Generate colors based on species index, not their value
     const colors = data.map((_, index) => {
         // Calculate hue: starts from red (0) and goes towards green (120) based on species index
-        const hue = (index / (totalSpecies - 1)) * 120; // Ensures the first is red and the last is green
-        return `hsl(${hue}, 100%, 50%)`; // Full saturation and lightness at 50% for vibrant colors
+        const hue = (index / (totalSpecies - 1)) * 240; // Ensures the first is red and the last is green
+        return `hsl(${hue}, 90%, 50%)`; // Full saturation and lightness at 50% for vibrant colors
     });
 
     // Create a new Chart instance
