@@ -101,13 +101,15 @@ function validateSpeciesCount() {
         const abundanceInput = document.createElement('input');
         abundanceInput.type = 'number';
         abundanceInput.id = `abundanceSpecies${i}`;
-        abundanceInput.placeholder = `Abundance for Species ${i}`;
+        abundanceInput.placeholder = `Abundance for S${i}`;
+        abundanceInput.className = 'input-small';
 
         // Create and append biomass input
         const biomassInput = document.createElement('input');
         biomassInput.type = 'number';
         biomassInput.id = `biomassSpecies${i}`;
-        biomassInput.placeholder = `Biomass for Species ${i}`;
+        biomassInput.placeholder = `Biomass for S${i} (kg)`;
+        biomassInput.className = 'input-small';
 
         // Append inputs to the container
         container.appendChild(document.createTextNode(`Species ${i}: `));

@@ -54,3 +54,9 @@ body {
     padding: 5px;
 }
 
+.input-small {
+    width: 130px; /* Adjust width as needed */
+    height: 17px; /* Adjust height as needed */
+    padding: 3px; /* Adjust padding as needed */
+    font-size: 12px; /* Adjust font size as needed */
+}
