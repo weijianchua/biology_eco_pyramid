@@ -103,7 +103,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 60%;
+    width: 80%;
     border-radius: 8px;
 }
 
