@@ -12,17 +12,24 @@ function generateEcosystem() {
         const biomassInput = document.getElementById(`biomassSpecies${i}`);
 
         const abundance = abundanceInput ? parseInt(abundanceInput.value, 10) || 0 : 0;
-        const biomass = biomassInput ? (parseInt(biomassInput.value, 10) || 0) * abundanceInput.value : 0;
+        const biomass = biomassInput ? parseInt(biomassInput.value, 10) || 0 : 0;
+
+        // Here's the fix: Multiply biomass by abundance to get total biomass value for the species
+        const biomassValue = biomass * abundance; 
 
         const speciesNameInput = document.getElementById(`speciesName${i}`);
         const speciesName = speciesNameInput ? speciesNameInput.value.trim() || `Species ${i}` : `Species ${i}`;
 
-        biomassData.push({value: biomass, species: speciesName});
+        // Push the total biomass value, not just the biomass per individual
+        biomassData.push({value: biomassValue, species: speciesName});
         abundanceData.push({value: abundance, species: speciesName});
-
     }
 
-    // Update charts
+    // Generate the funnel charts
+    generateFunnelChart('biomassFunnel', biomassData, biomassData.length);
+    generateFunnelChart('abundanceFunnel', abundanceData, abundanceData.length);
+
+    // Update the bar charts
     updateChart('pyramidOfBiomass', biomassData, 'Plot of Biomass',' Plot of Biomass (kg)','greenToRed');
     updateChart('pyramidOfAbundance', abundanceData, 'Plot of Abundance',' Plot of Abundance','redToGreen');
 }
@@ -81,7 +88,6 @@ function updateChart(canvasId, data, label, chartTitle, colorRange) {
                         },
                         font: {
                             size: 16,
-                            style: 'underline'
                         },
                     }
                 }
@@ -180,3 +186,48 @@ function validateSpeciesCount() {
     }
 }
 
+function generateFunnelChart(containerId, data, totalSpecies) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear existing funnel
+
+    const maxValue = Math.max(...data.map(item => item.value)); // Find the max value for width calculation
+
+    data.forEach((item, index) => {
+        const segmentContainer = document.createElement('div');
+        segmentContainer.className = 'funnel-segment-container';
+
+        const label = document.createElement('div');
+        label.className = 'funnel-label';
+        label.textContent = `${item.species}:`;
+
+        const segment = document.createElement('div');
+        segment.className = 'funnel-segment';
+        segment.style.backgroundColor = getColorForIndex(index, totalSpecies);
+
+        const segmentWidth = (item.value / maxValue) * 100;
+        segment.style.width = `${segmentWidth}%`; // Set width as a percentage
+
+        // Create a new div for the value label on the right
+        const valueLabel = document.createElement('div');
+        valueLabel.className = 'funnel-value-label';
+        valueLabel.textContent = `(${item.value})`; // Format the value to 1 decimal place
+
+        segmentContainer.appendChild(label);
+        segmentContainer.appendChild(segment);
+        segmentContainer.appendChild(valueLabel); // Append the value label to the segment container
+        container.appendChild(segmentContainer);
+
+        console.log(`Species: ${item.species}, Value: ${item.value}, Width: ${segment.style.width}`);
+    });
+}
+
+
+function getColorForIndex(index, totalSpecies) {
+    // Calculate hue: starts from red (0) and goes towards green (120) based on species index
+    const hue = (index / (totalSpecies - 1)) * 240; // Adjusted to match your existing color range
+    return `hsl(${hue}, 90%, 50%)`; // Full saturation and lightness at 50% for vibrant colors
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    validateSpeciesCount(); // This could also be generateEcosystem() or any initial setup function
+});
