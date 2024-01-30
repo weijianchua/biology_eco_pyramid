@@ -11,16 +11,18 @@ function generateEcosystem() {
         const abundanceInput = document.getElementById(`abundanceSpecies${i}`);
         const biomassInput = document.getElementById(`biomassSpecies${i}`);
 
-        const abundance = abundanceInput ? parseInt(abundanceInput.value, 10) || 0 : 0;
-        const biomass = biomassInput ? parseInt(biomassInput.value, 10) || 0 : 0;
+        let abundance = abundanceInput ? parseFloat(abundanceInput.value) || 0 : 0;
+        let biomass = biomassInput ? parseFloat(biomassInput.value) || 0 : 0;
 
-        // Here's the fix: Multiply biomass by abundance to get total biomass value for the species
-        const biomassValue = biomass * abundance; 
+        // Ensure values are not negative, if they are, set them to 0
+        abundance = Math.max(abundance, 0);
+        biomass = Math.max(biomass, 0);
+
+        const biomassValue = biomass * abundance;
 
         const speciesNameInput = document.getElementById(`speciesName${i}`);
         const speciesName = speciesNameInput ? speciesNameInput.value.trim() || `Species ${i}` : `Species ${i}`;
 
-        // Push the total biomass value, not just the biomass per individual
         biomassData.push({value: biomassValue, species: speciesName});
         abundanceData.push({value: abundance, species: speciesName});
     }
@@ -30,9 +32,11 @@ function generateEcosystem() {
     generateFunnelChart('abundanceFunnel', abundanceData, abundanceData.length);
 
     // Update the bar charts
-    updateChart('pyramidOfBiomass', biomassData, 'Plot of Biomass',' Plot of Biomass (kg)','greenToRed');
-    updateChart('pyramidOfAbundance', abundanceData, 'Plot of Abundance',' Plot of Abundance','redToGreen');
+    updateChart('pyramidOfBiomass', biomassData, 'Plot of Biomass', 'Plot of Total Biomass (kg)', 'greenToRed');
+    updateChart('pyramidOfAbundance', abundanceData, 'Plot of Numbers', 'Plot of Numbers', 'redToGreen');
 }
+
+
 
 
 function updateChart(canvasId, data, label, chartTitle, colorRange) {
@@ -146,6 +150,7 @@ function validateSpeciesCount() {
         abundanceInput.id = `abundanceSpecies${i}`;
         abundanceInput.placeholder = `Abundance for S${i}`;
         abundanceInput.className = 'input-small';
+        abundanceInput.min = '0'; // Set minimum value to 0 to prevent negative numbers
 
         // Create and append biomass input
         const biomassInput = document.createElement('input');
@@ -153,6 +158,8 @@ function validateSpeciesCount() {
         biomassInput.id = `biomassSpecies${i}`;
         biomassInput.placeholder = `Biomass for S${i} (kg)`;
         biomassInput.className = 'input-small';
+        biomassInput.min = '0'; // Set minimum value to 0 to prevent negative numbers
+        
 
         // Create and append species name input
         const speciesNameInput = document.createElement('input');

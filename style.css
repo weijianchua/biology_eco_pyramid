@@ -125,7 +125,7 @@ body {
 }
 
 .funnel-value-label {
-    padding-left: 10px; /* Space between the segment and the label */
+    padding-left: 5px; /* Space between the segment and the label */
     /* Add other styles as needed (font size, color, etc.) */
 }
 

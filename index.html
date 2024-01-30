@@ -14,12 +14,12 @@
     <div class="content_container" style="text-align:center; padding: 20px">
         <h1 class="content_title">Ecological Pyramids</h1>
         <p class="content_text">This is a simulation to help you better understand ecological pyramids. 
-        </br> </br> Using this simulation, you can generate the <b>pyramid of biomass</b> and <b>pyramid of abundance</b> </br>based on an ecosystem composition of your choice.</p>
+        </br> </br> Using this simulation, you can generate the <b>pyramid of numbers</b> and <b>pyramid of biomass</b> </br>based on an ecosystem composition of your choice.</p>
     </div>
 
     <div class="body_container" style="text-align:center; margin-top: 15px; padding: 20px">
         <div>
-            <p>Using the field below, indicate the number of species present in this ecosystem. Then, add in the </br>abundance (no. of individuals) and biomass (mass of each individual in kilograms) for each species.</p>
+            <p>Using the field below, indicate the number of species present in this ecosystem. Then, add in the </br>abundance (no. of individuals) and biomass (mass of each individual in kilograms) for each species.</br></br> *Note that ecological pyramids are arranged such that <i>Producers</i> are always found at the base of the pyramids.</p>
             <label for="speciesCount">Number of Species:</label>
             <select id="speciesCount" onchange="validateSpeciesCount()">
                 <option value="1">1</option>
@@ -47,11 +47,11 @@
         </div>    
 
         <div class="funnel-chart-container" >               
-            <h2 class="funnel-title">Pyramid of Abundance</h2>
+            <h2 class="funnel-title">Pyramid of Numbers</h2>
             <div class="funnel-container" id="abundanceFunnel"></div>
         </div>
         <div class="funnel-chart-container">
-            <h2 class="funnel-title">Pyramid of Biomass (kg)</h2>
+            <h2 class="funnel-title">Pyramid of Total Biomass (kg)</h2>
             <div class="funnel-container" id="biomassFunnel"></div>  
         </div>
 
