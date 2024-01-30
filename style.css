@@ -91,9 +91,78 @@ body {
     background-color: white;
     color: black;
     border: 2px solid #04AA6D;
+    border-radius: 10px;
 }
 
 .button1:hover {
     background-color: #04AA6D;
     color: white;
 }
+
+.funnel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 60%;
+    border-radius: 8px;
+}
+
+.funnel-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.funnel-chart-container {
+    background-color: #FEF2DC;
+    display: flex; /* Use Flexbox */
+    flex-direction: column;
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically, if needed */
+    gap: 5%; /* Add some space between the two canvases */
+    width:80%;
+    margin-top: 15px; 
+    padding: 20px;
+}
+
+.funnel-value-label {
+    padding-left: 10px; /* Space between the segment and the label */
+    /* Add other styles as needed (font size, color, etc.) */
+}
+
+
+.funnel-segment-container {
+    display: flex;
+    justify-content: center; /* Center segments for a funnel effect */
+    align-items: center;
+}
+
+.funnel-label {
+    min-width: 100px; /* Adjust as needed to give labels a consistent width */
+    text-align: right; /* Aligns the text to the right */
+    padding-right: 10px; /* Adds some space between the label and the segment */
+}
+
+.funnel-segment {
+    margin: 10px; /* Increase spacing */
+    font-size: 18px; /* Increase font size for better readability */
+    background-color: #76b852; /* Example color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Smooth transition for width changes */
+    height: 40px;
+}
+
+.funnel-segment:hover {
+    background-color: #669966; /* Darker shade on hover */
+    cursor: pointer; /* Change cursor to indicate interactivity */
+}
+
+.funnel-segment::before {
+    content: attr(data-label); /* Use a data attribute for the label */
+    margin-right: 10px;
+}
+
