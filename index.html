@@ -21,7 +21,13 @@
         <div>
             <p>Using the field below, indicate the number of species present in this ecosystem. Then, add in the </br>abundance (no. of individuals) and biomass (mass of each individual in kilograms) for each species.</p>
             <label for="speciesCount">Number of Species:</label>
-            <input type="number" id="speciesCount" value="0" min="1" max="5" oninput="validateSpeciesCount()">
+            <select id="speciesCount" onchange="validateSpeciesCount()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
             <div id="speciesCountMessage" style="color: red;"></div> 
         </div>
 
